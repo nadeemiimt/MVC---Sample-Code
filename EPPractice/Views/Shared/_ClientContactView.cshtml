@@ -1,0 +1,45 @@
+﻿@model EPCommon.ViewModels.ClientContactModel
+
+@{
+    var customId = Model.BusinessAreaTypeId + "CustomId";
+}
+<div id="@Model.BusinessAreaTypeId">
+    <div class="form-group">
+        @Html.DisplayFor(m => m.BusinessAreaType, new { @class = "form-control", Name = "BusinessAreas[" + customId + "].BusinessAreaType" })
+        @Html.HiddenFor(x => x.BusinessAreaTypeId, new { Name = "BusinessAreas[" + customId + "].BusinessAreaTypeId" })
+        <input type="hidden" name='BusinessAreas.Index' value="@customId" />
+    </div>
+    <div class="form-group">
+        <div>
+            @Html.TextBoxFor(x => x.ContactName, new { @class = "form-control", placeholder = Html.DisplayNameFor(n => n.ContactName), Name = "BusinessAreas[" + customId + "].ContactName" })
+            @Html.ValidationMessageFor(model => model.ContactName, "", new { @class = "text-danger" })
+        </div>
+    </div>
+    <div class="form-group">
+        <div>
+            @Html.TextBoxFor(x => x.Designation, new { @class = "form-control", placeholder = Html.DisplayNameFor(n => n.Designation), Name = "BusinessAreas[" + customId + "].Designation" })
+            @Html.ValidationMessageFor(model => model.Designation, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        <div>
+            @Html.TextBoxFor(x => x.EmailId, new { @class = "form-control", placeholder = Html.DisplayNameFor(n => n.EmailId), Name = "BusinessAreas[" + customId + "].EmailId" })
+            @Html.ValidationMessageFor(model => model.EmailId, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        <div>
+            @Html.TextBoxFor(x => x.PhoneNo, new { @class = "form-control", placeholder = Html.DisplayNameFor(n => n.PhoneNo), Name = "BusinessAreas[" + customId + "].PhoneNo" })
+            @Html.ValidationMessageFor(model => model.PhoneNo, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        <div>
+            @Html.TextBoxFor(x => x.FaxNo, new { @class = "form-control", placeholder = Html.DisplayNameFor(n => n.FaxNo), Name = "BusinessAreas[" + customId + "].FaxNo" })
+            @Html.ValidationMessageFor(model => model.FaxNo, "", new { @class = "text-danger" })
+        </div>
+    </div>
+</div>

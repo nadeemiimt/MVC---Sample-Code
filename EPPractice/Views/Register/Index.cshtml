@@ -1,0 +1,153 @@
+﻿@using EPCommon.ViewModels
+@using EPPractice.Helpers.Html
+@model EPCommon.ViewModels.RegisterModel
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<script src="~/Scripts/Register.js"></script>
+<h2>Register</h2>
+
+<div id="statusDiv">
+</div>
+<img id="ajax-loader" src="~/Content/Images/ajax-loader.gif" style="display: none" />
+@using (Ajax.BeginForm("Register", "Register", new AjaxOptions
+{
+    HttpMethod = "POST",
+    UpdateTargetId = "statusDiv",
+    InsertionMode = InsertionMode.Replace,
+    LoadingElementId = "ajax-loader",
+    OnBegin = "onBegin",
+    OnComplete = "onComplete",
+    OnSuccess = "onSuccess",
+    OnFailure = "onFailure"
+}))
+{
+    <center><h2>Submit Company Info:</h2></center>
+
+    <div class="form-group">
+        <table>
+            <tr>
+                <td>
+                    @Html.TextBoxFor(x => x.CompanyInfo.ClientName, new { @class = "form-control", placeholder = Html.DisplayNameFor(n => n.CompanyInfo.ClientName) })
+                    @Html.ValidationMessageFor(model => model.CompanyInfo.ClientName, "", new { @class = "text-danger" })
+                </td>
+                <td>
+                    @Html.TextBoxFor(x => x.CompanyInfo.CompanyType, new { @class = "form-control", placeholder = Html.DisplayNameFor(n => n.CompanyInfo.CompanyType) })
+                    @Html.ValidationMessageFor(model => model.CompanyInfo.CompanyType, "", new { @class = "text-danger" })
+                </td>
+            </tr>
+        </table>
+    </div>
+    <div class="form-group">
+        <table>
+            <tr>
+                <td>
+                    @Html.TextBoxFor(x => x.CompanyInfo.FoundationYear, new { @class = "form-control", placeholder = Html.DisplayNameFor(n => n.CompanyInfo.FoundationYear) })
+                    @Html.ValidationMessageFor(model => model.CompanyInfo.FoundationYear, "", new { @class = "text-danger" })
+                </td>
+                <td>
+                    @Html.TextBoxFor(x => x.CompanyInfo.TotalEmployees, new { @class = "form-control", placeholder = Html.DisplayNameFor(n => n.CompanyInfo.TotalEmployees) })
+                    @Html.ValidationMessageFor(model => model.CompanyInfo.TotalEmployees, "", new { @class = "text-danger" })
+                </td>
+            </tr>
+        </table>
+    </div>
+
+    <div class="form-group">
+        <table>
+            <tr>
+                <td>
+                    @Html.TextBoxFor(x => x.CompanyInfo.Address, new { @class = "form-control", placeholder = Html.DisplayNameFor(n => n.CompanyInfo.Address) })
+                    @Html.ValidationMessageFor(model => model.CompanyInfo.Address, "", new { @class = "text-danger" })
+                </td>
+                <td>
+                    @Html.TextBoxFor(x => x.CompanyInfo.City, new { @class = "form-control", placeholder = Html.DisplayNameFor(n => n.CompanyInfo.City) })
+                    @Html.ValidationMessageFor(model => model.CompanyInfo.City, "", new { @class = "text-danger" })
+                </td>
+            </tr>
+        </table>
+    </div>
+    <div class="form-group">
+        <div>
+            @Html.TextBoxFor(x => x.CompanyInfo.PostCode, new { @class = "form-control", placeholder = Html.DisplayNameFor(n => n.CompanyInfo.PostCode) })
+            @Html.ValidationMessageFor(model => model.CompanyInfo.PostCode, "", new { @class = "text-danger" })
+        </div>
+    </div>
+    <br />
+    <center><h2>Submit Contact Info:</h2></center>
+    <div class="form-group">
+        <table>
+            <tr>
+                <td>
+                    @Html.TextBoxFor(x => x.ContactInfo.Contact.ContactName, new { @class = "form-control", placeholder = Html.DisplayNameFor(n => n.ContactInfo.Contact.ContactName) })
+                    @Html.ValidationMessageFor(model => model.ContactInfo.Contact.ContactName, "", new { @class = "text-danger" })
+                </td>
+                <td>
+                    @Html.TextBoxFor(x => x.ContactInfo.Contact.Designation, new { @class = "form-control", placeholder = Html.DisplayNameFor(n => n.ContactInfo.Contact.Designation) })
+                    @Html.ValidationMessageFor(model => model.ContactInfo.Contact.Designation, "", new { @class = "text-danger" })
+                </td>
+            </tr>
+        </table>
+    </div>
+
+    <div class="form-group">
+        <table>
+            <tr>
+                <td>
+                    @Html.TextBoxFor(x => x.ContactInfo.Contact.EmailId, new { @class = "form-control", placeholder = Html.DisplayNameFor(n => n.ContactInfo.Contact.EmailId) })
+                    @Html.ValidationMessageFor(model => model.ContactInfo.Contact.EmailId, "", new { @class = "text-danger" })
+                </td>
+                <td>
+                    @Html.TextBoxFor(x => x.ContactInfo.WebSiteUrl, new { @class = "form-control", placeholder = Html.DisplayNameFor(n => n.ContactInfo.WebSiteUrl) })
+                    @Html.ValidationMessageFor(model => model.ContactInfo.WebSiteUrl, "", new { @class = "text-danger" })
+                </td>
+            </tr>
+        </table>
+    </div>
+    <div class="form-group">
+        <table>
+            <tr>
+                <td>
+                    @Html.TextBoxFor(x => x.ContactInfo.Contact.PhoneNo, new { @class = "form-control", placeholder = Html.DisplayNameFor(n => n.ContactInfo.Contact.PhoneNo) })
+                    @Html.ValidationMessageFor(model => model.ContactInfo.Contact.PhoneNo, "", new { @class = "text-danger" })
+                </td>
+                <td>
+                    @Html.TextBoxFor(x => x.ContactInfo.Contact.FaxNo, new { @class = "form-control", placeholder = Html.DisplayNameFor(n => n.ContactInfo.Contact.FaxNo) })
+                    @Html.ValidationMessageFor(model => model.ContactInfo.Contact.FaxNo, "", new { @class = "text-danger" })
+                </td>
+            </tr>
+        </table>
+    </div>
+    <div class="form-group">
+        <div>
+            @Html.LabelFor(x => x.ContactInfo.BusinessSegmentId)
+            @foreach (var a in ViewBag.BusinessSegments as List<BusinessSegmentTypesModel>)
+            {
+                @Html.RadioButtonFor(m => m.ContactInfo.BusinessSegmentId, a.Id) @:&nbsp; @a.SegmentType&nbsp;
+}
+            @Html.ValidationMessageFor(model => model.ContactInfo.Contact.ContactName, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        <div>
+            @Html.LabelFor(x => x.BusinessAreas)
+            @Html.CheckBoxList((List<SelectListItem>)ViewBag.BusinessAreas, "onClick ='addBusinessAreas($(this))' ")
+        </div>
+    </div>
+         <div class="form-group" id="areaContacts">
+         </div>
+    <br/>
+    <div class="form-group">
+        @* Hardcoded Model Interested In as this functionality is not defined *@
+        Modules Interested In:
+        <input type="checkbox" name="vehicle1" checked="checked"/> <label>FIT</label>
+        <input type="checkbox" name="vehicle2"/> <label>GROUP</label>
+    </div>
+     <center> <button type = "submit" class="btn btn-success btn-sm glyphicon glyphicon-remove">SIGNUP</button>
+     </center>
+}
+
+
